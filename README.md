@@ -14,7 +14,7 @@ Lists all dependents of a project, using npm and [`ecosyste.ms`](https://ecosyst
 ### Simple
 
 ```javascript
-import { fetchEcosystemDependents } from '../index.js';
+import { fetchEcosystemDependents } from 'list-dependents';
 
 const result = fetchEcosystemDependents(name);
 
