@@ -13,7 +13,6 @@
   "engines": {
     "node": ">=18.6.0"
   },
-  "bin": "cli.js",
   "type": "module",
   "exports": "./index.js",
   "types": "index.d.ts",
@@ -71,12 +70,7 @@
   "dependencies": {
     "buffered-async-iterable": "^0.3.0",
     "bunyan-adaptor": "^6.0.1",
-    "chalk": "^5.3.0",
     "hast-util-from-html": "^2.0.1",
-    "hast-util-select": "^6.0.2",
-    "ora": "^8.0.1",
-    "peowly": "^1.2.0",
-    "peowly-commands": "^1.0.0",
-    "pony-cause": "^2.1.11"
+    "hast-util-select": "^6.0.2"
   }
 }
