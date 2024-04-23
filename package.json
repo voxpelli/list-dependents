@@ -63,7 +63,7 @@
     "knip": "^5.9.4",
     "npm-run-all2": "^6.1.2",
     "read-pkg": "^9.0.1",
-    "ts-ignore-import": "^3.0.0",
+    "ts-ignore-import": "^4.0.1",
     "type-coverage": "^2.28.1",
     "typescript": "~5.4.5"
   },
