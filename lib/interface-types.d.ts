@@ -27,7 +27,7 @@ interface DependentLookupOptions {
 export type EcosystemFilterCallback = (item: import('./interface-types.d.ts').EcosystemDependentsMeta) => boolean;
 
 interface FilteredLookupOptions {
-  filter?: EcosystemFilterCallback
+  filter?: EcosystemFilterCallback | undefined;
 }
 
 export interface PackageLookupOptions extends DependentLookupOptions, FilteredLookupOptions {}
@@ -40,7 +40,7 @@ export interface NpmDependentsOptions extends DependentsOptions {
   minDownloadsLastWeek?: number | undefined;
 }
 
-export interface EcosystemDependentsOptions extends DependentsOptions {
+export interface EcosystemDependentsOptions extends DependentsOptions, FilteredLookupOptions {
   maxAge?: number | undefined;
   minDownloadsLastMonth?: number | undefined;
   perPage?: number | undefined;
