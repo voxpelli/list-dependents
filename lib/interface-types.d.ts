@@ -19,10 +19,21 @@ export interface DependentsItem extends DependentsMeta {
 }
 export interface EcosystemDependentsItem extends DependentsItem, EcosystemDependentsMeta {}
 
-export interface DependentsOptions {
-  maxPages?: number | undefined;
+interface DependentLookupOptions {
   logger?: BunyanLite | undefined;
   skipPkg?: boolean | undefined;
+}
+
+export type EcosystemFilterCallback = (item: import('./interface-types.d.ts').EcosystemDependentsMeta) => boolean;
+
+interface FilteredLookupOptions {
+  filter?: EcosystemFilterCallback
+}
+
+export interface PackageLookupOptions extends DependentLookupOptions, FilteredLookupOptions {}
+
+export interface DependentsOptions extends DependentLookupOptions {
+  maxPages?: number | undefined;
 }
 
 export interface NpmDependentsOptions extends DependentsOptions {
