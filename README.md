@@ -46,30 +46,62 @@ fetchEcosystemDependents(name, [options]) => AsyncGenerator<EcosystemDependentsI
 
 #### Options
 
- * `logger` – a `BunyanLite` compatible logger instance
- * `maxAge` – the maximum age of latest release to uinclude
- * `maxPages` – the maximum number of source pages to fetch (there are `perPage` items per page)
- * `minDownloadsLastMonth = 400` – the minimum amount of downloads needed to be returned
- * `perPage = 36` – how many items per page to lookup
- * `skipPkg` – when set skips resolving `package.json`
+* `filter` – a function that's called with an `EcosystemDependentsMeta` object and which should return `true` for it to be included or else `false`
+* `logger` – a `BunyanLite` compatible logger instance
+* `maxAge` – the maximum age of latest release to uinclude
+* `maxPages` – the maximum number of source pages to fetch (there are `perPage` items per page)
+* `minDownloadsLastMonth = 400` – the minimum amount of downloads needed to be returned
+* `perPage = 36` – how many items per page to lookup
+* `skipPkg` – when set skips resolving `package.json`
 
 #### Types
 
 ```ts
 import type { NormalizedPackageJson } from 'read-pkg';
 
-interface DependentsItem {
+export interface DependentsMeta {
   downloads: number;
   name: string;
-  pkg?: NormalizedPackageJson | undefined,
 }
 
-interface EcosystemDependentsItem extends DependentsItem {
+export interface EcosystemDependentsMeta extends DependentsMeta {
   dependentCount: number | undefined,
   firstRelease: string | undefined,
   latestRelease: string | undefined,
+  repositoryUrl: string | undefined;
 }
+
+export interface DependentsItem extends DependentsMeta {
+  pkg?: NormalizedPackageJson | undefined;
+}
+
+export interface EcosystemDependentsItem extends DependentsItem, EcosystemDependentsMeta {}
 ```
+
+### fetchEcosystemPackage()
+
+Uses the [`ecosyste.ms`](https://ecosyste.ms/) API to resolve a package
+
+#### Syntax
+
+```ts
+fetchEcosystemPackage(name, [options]) => Promise<EcosystemDependentsItem>
+```
+
+#### Arguments
+
+* `name`: The name of the package to do the lookup for
+* `options`: Type `PackageLookupOptions` – optional options
+
+#### Options
+
+* `filter` – a function that's called with an `EcosystemDependentsMeta` object and which should return `true` for it to be included or else `false`
+* `logger` – a `BunyanLite` compatible logger instance
+* `skipPkg` – when set skips resolving `package.json`
+
+#### Types
+
+See [`fetchEcosystemDependents`](#fetchecosystemdependents)
 
 ### fetchNpmDependents()
 
@@ -88,10 +120,10 @@ fetchNpmDependents(name, [options]) => AsyncGenerator<DependentsItem>
 
 #### Options
 
- * `logger` – a `BunyanLite` compatible logger instande
- * `maxPages` – the maximum number of source pages to fetch (there are `36` items per page)
- * `minDownloadsLastWeek = 100` – the minimum amount of downloads needed to be returned
- * `skipPkg` – when set skips resolving `package.json`
+* `logger` – a `BunyanLite` compatible logger instande
+* `maxPages` – the maximum number of source pages to fetch (there are `36` items per page)
+* `minDownloadsLastWeek = 100` – the minimum amount of downloads needed to be returned
+* `skipPkg` – when set skips resolving `package.json`
 
 #### Types
 
@@ -122,8 +154,8 @@ fetchNpmDependentList(name, [options]) => AsyncGenerator<string>
 
 #### Options
 
- * `logger` – a `BunyanLite` compatible logger instande
- * `maxPages` – the maximum number of source pages to fetch (there are `36` items per page)
+* `logger` – a `BunyanLite` compatible logger instande
+* `maxPages` – the maximum number of source pages to fetch (there are `36` items per page)
 
 ## Similar modules
 
