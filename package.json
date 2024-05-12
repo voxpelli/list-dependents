@@ -68,7 +68,7 @@
     "typescript": "~5.4.5"
   },
   "dependencies": {
-    "buffered-async-iterable": "^0.3.0",
+    "buffered-async-iterable": "^1.0.0",
     "bunyan-adaptor": "^6.0.1",
     "hast-util-from-html": "^2.0.1",
     "hast-util-select": "^6.0.2"
