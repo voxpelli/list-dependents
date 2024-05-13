@@ -86,7 +86,7 @@ Uses the [`ecosyste.ms`](https://ecosyste.ms/) API to resolve a package
 #### Syntax
 
 ```ts
-fetchEcosystemPackage(name, [options]) => Promise<EcosystemDependentsItem>
+fetchEcosystemPackage(name, [options]) => Promise<EcosystemDependentsItem|false|undefined>
 ```
 
 #### Arguments
@@ -100,6 +100,10 @@ fetchEcosystemPackage(name, [options]) => Promise<EcosystemDependentsItem>
 * `filter` – a function that's called with an `EcosystemDependentsMeta` object and which should return `true` for it to be included or else `false`
 * `logger` – a `BunyanLite` compatible logger instance
 * `skipPkg` – _`boolean | (meta: EcosystemDependentsMeta) => boolean`_ – when `true` skips resolving `package.json`
+
+#### Returns
+
+A promise resolving to `false` if the package is actively excluded, `undefined` if it couldn't be resolved and else `EcosystemDependentsItem`
 
 #### Types
 
