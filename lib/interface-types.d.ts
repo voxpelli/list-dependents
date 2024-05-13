@@ -11,6 +11,7 @@ export interface EcosystemDependentsMeta extends DependentsMeta {
   dependentCount: number | undefined,
   firstRelease: string | undefined,
   latestRelease: string | undefined,
+  latestVersion: string | undefined,
   repositoryUrl: string | undefined;
 }
 
