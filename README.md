@@ -96,9 +96,10 @@ fetchEcosystemPackage(name, [options]) => Promise<EcosystemDependentsItem>
 
 #### Options
 
+* `dependentOn` – ensure the package depends on this module. Only works when `package.json` is fetched.
 * `filter` – a function that's called with an `EcosystemDependentsMeta` object and which should return `true` for it to be included or else `false`
 * `logger` – a `BunyanLite` compatible logger instance
-* `skipPkg` – when set skips resolving `package.json`
+* `skipPkg` – _`boolean | (meta: EcosystemDependentsMeta) => boolean`_ – when `true` skips resolving `package.json`
 
 #### Types
 

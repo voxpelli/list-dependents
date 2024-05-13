@@ -22,7 +22,7 @@ export interface EcosystemDependentsItem extends DependentsItem, EcosystemDepend
 
 interface DependentLookupOptions {
   logger?: BunyanLite | undefined;
-  skipPkg?: boolean | undefined;
+  skipPkg?: boolean | undefined | ((meta: EcosystemDependentsMeta) => boolean);
 }
 
 export type EcosystemFilterCallback = (item: import('./interface-types.d.ts').EcosystemDependentsMeta) => boolean;
@@ -31,10 +31,13 @@ interface FilteredLookupOptions {
   filter?: EcosystemFilterCallback | undefined;
 }
 
-export interface PackageLookupOptions extends DependentLookupOptions, FilteredLookupOptions {}
+export interface PackageLookupOptions extends DependentLookupOptions, FilteredLookupOptions {
+  dependentOn?: string | undefined;
+}
 
 export interface DependentsOptions extends DependentLookupOptions {
   maxPages?: number | undefined;
+  skipPkg?: boolean | undefined;
 }
 
 export interface NpmDependentsOptions extends DependentsOptions {
