@@ -16,6 +16,7 @@ export interface EcosystemDependentsMeta extends DependentsMeta {
 }
 
 export interface DependentsItem extends DependentsMeta {
+  targetVersion?: string | undefined,
   pkg?: NormalizedPackageJson | undefined;
 }
 export interface EcosystemDependentsItem extends DependentsItem, EcosystemDependentsMeta {}
