@@ -109,60 +109,6 @@ A promise resolving to `false` if the package is actively excluded, `undefined` 
 
 See [`fetchEcosystemDependents`](#fetchecosystemdependents)
 
-### fetchNpmDependents()
-
-Uses the npm [website](https://www.npmjs.com/browse/depended/c8), [registry API](https://github.com/npm/registry/blob/master/docs/REGISTRY-API.md#getpackageversion) and [download count API](https://github.com/npm/registry/blob/master/docs/download-counts.md) to resolve packages of dependents
-
-#### Syntax
-
-```ts
-fetchNpmDependents(name, [options]) => AsyncGenerator<DependentsItem>
-```
-
-#### Arguments
-
-* `name`: The name of the package to do the lookup for
-* `options`: Type `NpmDependentsOptions` – optional options
-
-#### Options
-
-* `logger` – a `BunyanLite` compatible logger instande
-* `maxPages` – the maximum number of source pages to fetch (there are `36` items per page)
-* `minDownloadsLastWeek = 100` – the minimum amount of downloads needed to be returned
-* `skipPkg` – when set skips resolving `package.json`
-
-#### Types
-
-```ts
-import type { NormalizedPackageJson } from 'read-pkg';
-
-interface DependentsItem = {
-  downloads: number;
-  name: string;
-  pkg?: NormalizedPackageJson | undefined,
-}
-```
-
-### fetchNpmDependentList()
-
-Uses the npm website to resolve dependent names. Used internally by [`fetchNpmDependents()`](#fetchnpmdependents)
-
-#### Syntax
-
-```ts
-fetchNpmDependentList(name, [options]) => AsyncGenerator<string>
-```
-
-#### Arguments
-
-* `name`: The name of the package to do the lookup for
-* `options`: Type `NpmDependentListOptions` – optional options
-
-#### Options
-
-* `logger` – a `BunyanLite` compatible logger instande
-* `maxPages` – the maximum number of source pages to fetch (there are `36` items per page)
-
 ## Similar modules
 
 * [`dependents`](https://github.com/pkgjs/dependents) – uses [`npm-dependants`](https://github.com/juliangruber/npm-dependants) together with the npm API and GitHub API to deliver a functionality similar to [`fetchEcosystemDependents()`](#fetchecosystemdependents) / [`fetchNpmDependents()`](#fetchnpmdependents)
