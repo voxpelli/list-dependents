@@ -2,12 +2,11 @@
 /* eslint-disable no-console */
 
 import { createLogger } from 'bunyan-adaptor';
-import { fetchEcosystemDependents, fetchNpmDependents } from '../index.js';
+import { fetchEcosystemDependents } from '../index.js';
 
 const name = process.argv[2];
-const ecosystem = process.argv[3] === 'ecosystem';
-const minDownloads = process.argv[4] ? Number.parseInt(process.argv[4]) : 100;
-const maxPages = process.argv[5] ? Number.parseInt(process.argv[5]) : undefined;
+const minDownloads = process.argv[3] ? Number.parseInt(process.argv[3]) : 100;
+const maxPages = process.argv[4] ? Number.parseInt(process.argv[4]) : undefined;
 
 if (!name) {
   console.error('Expected a package name');
@@ -19,9 +18,7 @@ const options = /** @satisfies {import('../index.js').DependentsOptions} */ ({
   maxPages,
 });
 
-const result = ecosystem
-  ? fetchEcosystemDependents(name, { ...options, minDownloadsLastMonth: minDownloads })
-  : fetchNpmDependents(name, { ...options, minDownloadsLastWeek: minDownloads });
+const result = fetchEcosystemDependents(name, { ...options, minDownloadsLastMonth: minDownloads });
 
 for await (const { downloads, name, pkg, ...rest } of result) {
   console.log(downloads, name, rest, pkg?.description);

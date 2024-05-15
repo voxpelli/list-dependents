@@ -41,10 +41,6 @@ export interface DependentsOptions extends DependentLookupOptions {
   skipPkg?: boolean | undefined;
 }
 
-export interface NpmDependentsOptions extends DependentsOptions {
-  minDownloadsLastWeek?: number | undefined;
-}
-
 export interface EcosystemDependentsOptions extends DependentsOptions, FilteredLookupOptions {
   maxAge?: number | undefined;
   minDownloadsLastMonth?: number | undefined;
