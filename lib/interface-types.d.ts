@@ -1,6 +1,13 @@
 import type { BunyanLite } from "bunyan-adaptor";
+import { Got } from "got";
 // @ts-ignore
 import type { NormalizedPackageJson } from "read-pkg";
+
+declare global {
+  // Trying to upstream here: https://github.com/octet-stream/form-data-encoder/pull/29
+  // The <R = any> is needed for compatibility with the ReadableStream from lib.dom.d.ts
+  interface ReadableStream<R = any> extends NodeJS.ReadableStream {}
+}
 
 export interface DependentsMeta {
   downloads: number;
@@ -21,8 +28,12 @@ export interface DependentsItem extends DependentsMeta {
 }
 export interface EcosystemDependentsItem extends DependentsItem, EcosystemDependentsMeta {}
 
-interface DependentLookupOptions {
+interface HttpClientOptions {
   logger?: BunyanLite | undefined;
+  userAgent?: string | undefined;
+}
+
+interface DependentLookupOptions extends HttpClientOptions {
   skipPkg?: boolean | undefined | ((meta: EcosystemDependentsMeta) => boolean);
 }
 
@@ -33,6 +44,7 @@ interface FilteredLookupOptions {
 }
 
 export interface PackageLookupOptions extends DependentLookupOptions, FilteredLookupOptions {
+  client?: Got | undefined;
   dependentOn?: string | undefined;
 }
 
