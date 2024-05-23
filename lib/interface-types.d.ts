@@ -48,6 +48,9 @@ export interface PackageLookupOptions extends DependentLookupOptions, FilteredLo
   dependentOn?: string | undefined;
 }
 
+export type PackageFetchQueueOptions = Pick<PackageLookupOptions, 'client' | 'logger' | 'userAgent'>;
+export type PackageFetchQueueLookupOptions = Omit<PackageLookupOptions, 'client' | 'logger' | 'userAgent'>;
+
 export interface DependentsOptions extends DependentLookupOptions {
   maxPages?: number | undefined;
   skipPkg?: boolean | undefined;
