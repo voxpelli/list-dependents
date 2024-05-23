@@ -69,6 +69,7 @@
   "dependencies": {
     "buffered-async-iterable": "^1.0.0",
     "bunyan-adaptor": "^6.0.1",
-    "got": "^14.3.0"
+    "got": "^14.3.0",
+    "pony-cause": "^2.1.11"
   }
 }
