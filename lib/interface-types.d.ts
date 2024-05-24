@@ -14,6 +14,11 @@ export interface DependentsMeta {
   name: string;
 }
 
+export interface DependentsItem extends DependentsMeta {
+  targetVersion?: string | undefined,
+  pkg?: NormalizedPackageJson | undefined;
+}
+
 export interface EcosystemDependentsMeta extends DependentsMeta {
   dependentCount: number | undefined,
   firstRelease: string | undefined,
@@ -22,10 +27,6 @@ export interface EcosystemDependentsMeta extends DependentsMeta {
   repositoryUrl: string | undefined;
 }
 
-export interface DependentsItem extends DependentsMeta {
-  targetVersion?: string | undefined,
-  pkg?: NormalizedPackageJson | undefined;
-}
 export interface EcosystemDependentsItem extends DependentsItem, EcosystemDependentsMeta {}
 
 interface HttpClientOptions {

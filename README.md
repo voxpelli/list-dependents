@@ -41,43 +41,22 @@ fetchEcosystemDependents(name, [options]) => AsyncGenerator<EcosystemDependentsI
 
 #### Arguments
 
-* `name`: The name of the package to do the lookup for
-* `options`: Type `EcosystemDependentsOptions` – optional options
+* `name` – _`string`_ The name of the package to do the lookup for
+* `options` – _[`EcosystemDependentsOptions`](#ecosystemdependentsoptions)_ – optional options
 
-#### Options
+#### EcosystemDependentsOptions
 
-* `filter` – a function that's called with an `EcosystemDependentsMeta` object and which should return `true` for it to be included or else `false`
-* `logger` – a `BunyanLite` compatible logger instance
-* `maxAge` – the maximum age of latest release to uinclude
-* `maxPages` – the maximum number of source pages to fetch (there are `perPage` items per page)
-* `minDownloadsLastMonth = 400` – the minimum amount of downloads needed to be returned
-* `perPage = 36` – how many items per page to lookup
-* `skipPkg` – when set skips resolving `package.json`
+* `filter` – _`(meta: EcosystemDependentsMeta) => boolean`_ – function given [`EcosystemDependentsMeta`](#ecosystemdependentsmeta) and should return `true` for the package to be included
+* `logger` – _[`BunyanLite`](https://github.com/voxpelli/node-bunyan-adaptor#bunyanlite--simplified-pino--bunyan-type-subsets)_– a logger instance
+* `maxAge` – _`number`_ – the maximum age of latest release to uinclude
+* `maxPages` – _`number`_ – the maximum number of source pages to fetch (there are `perPage` items per page)
+* `minDownloadsLastMonth = 400` – _`number`_ – the minimum amount of downloads needed to be returned
+* `perPage = 36` – _`number`_ – how many items per page to lookup
+* `skipPkg` – _`boolean`_ – when set skips resolving `package.json`
 
-#### Types
+#### Returns
 
-```ts
-import type { NormalizedPackageJson } from 'read-pkg';
-
-export interface DependentsMeta {
-  downloads: number;
-  name: string;
-}
-
-export interface EcosystemDependentsMeta extends DependentsMeta {
-  dependentCount: number | undefined,
-  firstRelease: string | undefined,
-  latestRelease: string | undefined,
-  latestVersion: string | undefined,
-  repositoryUrl: string | undefined;
-}
-
-export interface DependentsItem extends DependentsMeta {
-  pkg?: NormalizedPackageJson | undefined;
-}
-
-export interface EcosystemDependentsItem extends DependentsItem, EcosystemDependentsMeta {}
-```
+An [`AsyncGenerator`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/AsyncGenerator) that yields [`EcosystemDependentsItem`](#ecosystemdependentsitem) objects
 
 ### fetchEcosystemPackage()
 
@@ -91,23 +70,87 @@ fetchEcosystemPackage(name, [options]) => Promise<EcosystemDependentsItem|false|
 
 #### Arguments
 
-* `name`: The name of the package to do the lookup for
-* `options`: Type `PackageLookupOptions` – optional options
+* `name` – _`string`_ – The name of the package to do the lookup for
+* `options` – _[`PackageLookupOptions`](#packagelookupoptions)_ – optional options
 
-#### Options
+#### PackageLookupOptions
 
-* `dependentOn` – ensure the package depends on this module. Only works when `package.json` is fetched.
-* `filter` – a function that's called with an `EcosystemDependentsMeta` object and which should return `true` for it to be included or else `false`
-* `logger` – a `BunyanLite` compatible logger instance
+* `client` – _[`got`](https://github.com/sindresorhus/got)_ – a client to use for HTTP requests
+* `ecosystemsClient` – _[`got`](https://github.com/sindresorhus/got)_ – a client to use for HTTP requests to ecosyste.ms
+* `dependentOn` – _`string`_ – ensure the package depends on this module. Only works when `package.json` is fetched.
+* `filter` – _`(meta: EcosystemDependentsMeta) => boolean`_ – function given [`EcosystemDependentsMeta`](#ecosystemdependentsmeta) and should return `true` for the package to be included
+* `logger` – _[`BunyanLite`](https://github.com/voxpelli/node-bunyan-adaptor#bunyanlite--simplified-pino--bunyan-type-subsets)_– a logger instance
 * `skipPkg` – _`boolean | (meta: EcosystemDependentsMeta) => boolean`_ – when `true` skips resolving `package.json`
+* `userAgent` – _`string`_ – an additional more specific user agent to preceed the built in one in the [`User-Agent`](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/User-Agent) header of requests
 
 #### Returns
 
-A promise resolving to `false` if the package is actively excluded, `undefined` if it couldn't be resolved and else `EcosystemDependentsItem`
+A promise resolving to `false` if the package is actively excluded, `undefined` if it couldn't be resolved and else [`EcosystemDependentsItem`](#ecosystemdependentsitem)
 
-#### Types
+### createPackageFetchQueue()
 
-See [`fetchEcosystemDependents`](#fetchecosystemdependents)
+Returns a [`fetchEcosystemPackage`](#fetchecosystempackage) equivalent that enforces a maximum concurrent fetches to npm + shares the back-off between all fetches, respecting the [`Retry-After`](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Retry-After) response headers.
+
+#### Syntax
+
+```ts
+const fetchPackage = createPackageFetchQueue([queueOptions]);
+const package = await fetchPackage(name, [options]);
+```
+
+#### Arguments
+
+* `queueOptions` – _[`PackageFetchQueueOptions`](#packagefetchqueueoptions)_ – optional options
+
+#### PackageFetchQueueOptions
+
+* `client` – _[`got`](https://github.com/sindresorhus/got)_ – a client to use for HTTP requests
+* `logger` – _[`BunyanLite`](https://github.com/voxpelli/node-bunyan-adaptor#bunyanlite--simplified-pino--bunyan-type-subsets)_– a logger instance
+* `userAgent` – _`string`_ – an additional more specific user agent to preceed the built in one in the [`User-Agent`](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/User-Agent) header of requests
+
+#### Returns
+
+A function equal to [`fetchEcosystemPackage`](#fetchecosystempackage) except that the `client`, `ecosystemClient`, `logger` and `userAgent` is overriden by the values sent in when it was created
+
+## Types
+
+### DependentsMeta
+
+```ts
+export interface DependentsMeta {
+  downloads: number;
+  name: string;
+}
+```
+
+### DependentsItem
+
+```ts
+import type { NormalizedPackageJson } from 'read-pkg';
+
+export interface DependentsItem extends DependentsMeta {
+  pkg?: NormalizedPackageJson | undefined;
+  targetVersion?: string | undefined,
+}
+```
+
+### EcosystemDependentsMeta
+
+```ts
+export interface EcosystemDependentsMeta extends DependentsMeta {
+  dependentCount: number | undefined,
+  firstRelease: string | undefined,
+  latestRelease: string | undefined,
+  latestVersion: string | undefined,
+  repositoryUrl: string | undefined;
+}
+```
+
+### EcosystemDependentsItem
+
+```ts
+export interface EcosystemDependentsItem extends DependentsItem, EcosystemDependentsMeta {}
+```
 
 ## Similar modules
 
