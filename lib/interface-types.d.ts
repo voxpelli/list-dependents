@@ -1,12 +1,14 @@
 import type { BunyanLite } from "bunyan-adaptor";
 import { Got } from "got";
 // @ts-ignore
+// eslint-disable-next-line n/no-unpublished-import
 import type { NormalizedPackageJson } from "read-pkg";
 
 declare global {
   // Trying to upstream here: https://github.com/octet-stream/form-data-encoder/pull/29
-  // The <R = any> is needed for compatibility with the ReadableStream from lib.dom.d.ts
-  interface ReadableStream<R = any> extends NodeJS.ReadableStream {}
+  // The <_R = any> is needed for compatibility with the ReadableStream from lib.dom.d.ts
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  interface ReadableStream<_R = any> extends NodeJS.ReadableStream {}
 }
 
 export interface DependentsMeta {
