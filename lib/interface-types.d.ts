@@ -60,6 +60,7 @@ export interface DependentsOptions extends DependentLookupOptions {
 }
 
 export interface EcosystemDependentsOptions extends DependentsOptions, FilteredLookupOptions {
+  includeHistoricDependents?: boolean;
   maxAge?: number | undefined;
   minDownloadsLastMonth?: number | undefined;
   perPage?: number | undefined;
