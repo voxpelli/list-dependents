@@ -41,14 +41,14 @@ fetchEcosystemDependents(name, [options]) => AsyncGenerator<EcosystemDependentsI
 
 #### Arguments
 
-* `name` – _`string`_ The name of the package to do the lookup for
+* `name` – _`string`_ – the name of the package to do the lookup for
 * `options` – _[`EcosystemDependentsOptions`](#ecosystemdependentsoptions)_ – optional options
 
 #### EcosystemDependentsOptions
 
 * `filter` – _`(meta: EcosystemDependentsMeta) => boolean`_ – function given [`EcosystemDependentsMeta`](#ecosystemdependentsmeta) and should return `true` for the package to be included
-* `logger` – _[`BunyanLite`](https://github.com/voxpelli/node-bunyan-adaptor#bunyanlite--simplified-pino--bunyan-type-subsets)_– a logger instance
-* `maxAge` – _`number`_ – the maximum age of latest release to uinclude
+* `logger` – _[`BunyanLite`](https://github.com/voxpelli/node-bunyan-adaptor#bunyanlite--simplified-pino--bunyan-type-subsets)_ – a logger instance
+* `maxAge` – _`number`_ – the maximum age of latest release to include
 * `maxPages` – _`number`_ – the maximum number of source pages to fetch (there are `perPage` items per page)
 * `minDownloadsLastMonth = 400` – _`number`_ – the minimum amount of downloads needed to be returned
 * `perPage = 36` – _`number`_ – how many items per page to lookup
