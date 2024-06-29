@@ -1,8 +1,8 @@
-import type { BunyanLite } from "bunyan-adaptor";
-import { Got } from "got";
+import type { BunyanLite } from 'bunyan-adaptor';
+import { Got } from 'got';
 // @ts-ignore
 // eslint-disable-next-line n/no-unpublished-import
-import type { NormalizedPackageJson } from "read-pkg";
+import type { NormalizedPackageJson } from 'read-pkg';
 
 declare global {
   // Trying to upstream here: https://github.com/octet-stream/form-data-encoder/pull/29
