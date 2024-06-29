@@ -1,5 +1,18 @@
 # Changelog
 
+## [2.2.1](https://github.com/voxpelli/list-dependents/compare/v2.2.0...v2.2.1) (2024-06-29)
+
+
+### 📚 Documentation
+
+* spelling fixes and formatting in README ([7f4e8b8](https://github.com/voxpelli/list-dependents/commit/7f4e8b827c066def5f2edc72ede4647282879f5c))
+
+
+### 🧹 Chores
+
+* **deps:** update type dependencies ([1005169](https://github.com/voxpelli/list-dependents/commit/1005169e889a3f94bc1c74f220c381fcfb995dc7))
+* update linting ([d72ca92](https://github.com/voxpelli/list-dependents/commit/d72ca92563ff5f75d33ddc13ff97e522543b520e))
+
 ## [2.2.0](https://github.com/voxpelli/list-dependents/compare/v2.1.1...v2.2.0) (2024-06-20)
 
 
