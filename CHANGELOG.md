@@ -1,5 +1,13 @@
 # Changelog
 
+## [2.2.2](https://github.com/voxpelli/list-dependents/compare/v2.2.1...v2.2.2) (2024-07-17)
+
+
+### 🧹 Chores
+
+* **deps:** update linting dependencies ([#13](https://github.com/voxpelli/list-dependents/issues/13)) ([a24769e](https://github.com/voxpelli/list-dependents/commit/a24769e7b3a409c577307f45b5956c18abede0a7))
+* **deps:** update type dependencies ([#24](https://github.com/voxpelli/list-dependents/issues/24)) ([354d36c](https://github.com/voxpelli/list-dependents/commit/354d36cd62b59fd25eeebe85fd26b5a7bac1bd44))
+
 ## [2.2.1](https://github.com/voxpelli/list-dependents/compare/v2.2.0...v2.2.1) (2024-06-29)
 
 
