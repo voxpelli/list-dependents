@@ -44,7 +44,7 @@
     "test": "run-s check"
   },
   "devDependencies": {
-    "@types/node": "^20.16.5",
+    "@types/node": "^20.17.6",
     "@voxpelli/eslint-config": "^21.0.0",
     "@voxpelli/tsconfig": "^14.0.0",
     "eslint": "^9.10.0",
@@ -54,8 +54,8 @@
     "npm-run-all2": "^6.2.2",
     "read-pkg": "^9.0.1",
     "ts-ignore-import": "^4.0.1",
-    "type-coverage": "^2.29.1",
-    "typescript": "~5.5.4",
+    "type-coverage": "^2.29.7",
+    "typescript": "~5.6.3",
     "validate-conventional-commit": "^1.0.4"
   },
   "dependencies": {
