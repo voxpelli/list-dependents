@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.2.3](https://github.com/voxpelli/list-dependents/compare/v2.2.2...v2.2.3) (2024-11-25)
+
+
+### 🧹 Chores
+
+* **deps:** update dependency @voxpelli/eslint-config to v22 ([#33](https://github.com/voxpelli/list-dependents/issues/33)) ([0d40d49](https://github.com/voxpelli/list-dependents/commit/0d40d49601aaf8a5eaf447860da561310caf504e))
+
 ## [2.2.2](https://github.com/voxpelli/list-dependents/compare/v2.2.1...v2.2.2) (2024-09-13)
 
 
