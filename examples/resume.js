@@ -25,6 +25,7 @@ if (!name) {
 }
 
 const outputFile = `${name}-dependents.ndjson`;
+/** @type {Set<string>} */
 let skipList = new Set();
 let processedCount = 0;
 
@@ -36,6 +37,7 @@ if (resumeFrom) {
 
     for (const line of lines) {
       try {
+        /** @type {{ name: string }} */
         const item = JSON.parse(line);
         skipList.add(item.name);
       } catch {
@@ -52,6 +54,7 @@ if (resumeFrom) {
   }
 }
 
+/** @type {import('../index.js').EcosystemDependentsOptions} */
 const options = {
   logger: createLogger(),
   maxPages: 3, // Limit for demo purposes
