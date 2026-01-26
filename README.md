@@ -51,7 +51,9 @@ fetchEcosystemDependents(name, [options]) => AsyncGenerator<EcosystemDependentsI
 * `maxAge` – _`number`_ – the maximum age of latest release to include
 * `maxPages` – _`number`_ – the maximum number of source pages to fetch (there are `perPage` items per page)
 * `minDownloadsLastMonth = 400` – _`number`_ – the minimum amount of downloads needed to be returned
+* `onProgress` – _`(progress: ProgressInfo) => void`_ – callback function called with progress updates. See [`ProgressInfo`](#progressinfo)
 * `perPage = 36` – _`number`_ – how many items per page to lookup
+* `skipList` – _`Set<string>`_ – a set of package names to skip during fetching (useful for resuming after interruption)
 * `skipPkg` – _`boolean`_ – when set skips resolving `package.json`
 
 #### Returns
@@ -151,6 +153,21 @@ export interface EcosystemDependentsMeta extends DependentsMeta {
 ```ts
 export interface EcosystemDependentsItem extends DependentsItem, EcosystemDependentsMeta {}
 ```
+
+### ProgressInfo
+
+```ts
+export interface ProgressInfo {
+  page: number;
+  itemsProcessed: number;
+  currentPackage: string;
+}
+```
+
+Provided to the `onProgress` callback with:
+* `page` – the current page number being processed
+* `itemsProcessed` – total number of items successfully processed so far
+* `currentPackage` – the name of the package currently being processed
 
 ## Similar modules
 
