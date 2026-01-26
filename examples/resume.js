@@ -48,7 +48,7 @@ if (resumeFrom) {
     processedCount = skipList.size;
     console.log(`Resuming from ${resumeFrom} with ${processedCount} packages already processed`);
   } catch (err) {
-    console.error(`Could not read resume file: ${err.message}`);
+    console.error(`Could not read resume file: ${/** @type {Error} */ (err).message}`);
     console.log('Starting fresh...');
     skipList = new Set();
   }
