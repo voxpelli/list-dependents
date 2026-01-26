@@ -24,6 +24,14 @@ export interface EcosystemDependentsMeta extends DependentsMeta {
 
 export interface EcosystemDependentsItem extends DependentsItem, EcosystemDependentsMeta {}
 
+export interface ProgressInfo {
+  page: number;
+  itemsProcessed: number;
+  currentPackage: string;
+}
+
+export type ProgressCallback = (progress: ProgressInfo) => void;
+
 interface HttpClientOptions {
   logger?: BunyanLite | undefined;
   userAgent?: string | undefined;
@@ -57,4 +65,6 @@ export interface EcosystemDependentsOptions extends DependentsOptions, FilteredL
   maxAge?: number | undefined;
   minDownloadsLastMonth?: number | undefined;
   perPage?: number | undefined;
+  skipList?: Set<string> | undefined;
+  onProgress?: ProgressCallback | undefined;
 }
