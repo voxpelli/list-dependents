@@ -29,6 +29,10 @@ See [`examples/cli.js`](./examples/cli.js)
 
 ## API
 
+### ecosyste.ms data licence and attribution
+
+Data returned by [`fetchEcosystemDependents()`](#fetchecosystemdependents), [`fetchEcosystemPackage()`](#fetchecosystempackage) and [`createPackageFetchQueue()`](#createpackagefetchqueue) originates from [`ecosyste.ms`](https://ecosyste.ms/). See [ecosyste.ms terms](https://ecosyste.ms/terms) and the licence linked from [ecosyste.ms](https://ecosyste.ms/) for the current attribution and licence terms.
+
 ### fetchEcosystemDependents()
 
 Uses the [`ecosyste.ms`](https://ecosyste.ms/) API to resolve packages of dependents
